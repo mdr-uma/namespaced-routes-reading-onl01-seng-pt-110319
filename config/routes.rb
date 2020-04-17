@@ -4,8 +4,12 @@ Rails.application.routes.draw do
   end
 
   resources :posts, only: %i[index show new create edit update]
-
-  get '/admin/stats', to: 'stats#index'
+  
+  # scope '/admin', module: 'admin' - this line changed to namespace
+  namespace :admin do
+    resources :stats, only: [:index]
+  end  
+  # get '/admin/stats', to: 'stats#index'
 
   root 'posts#index'
 end
